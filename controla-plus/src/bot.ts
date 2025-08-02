@@ -5,6 +5,8 @@ import { setupSaidaCommand } from './commands/saida';
 import { setupSaldoCommand } from './commands/saldo';
 import { setupHistoricoCommand } from './commands/historico';
 
+import { mensagemBoasVindas } from './mensagens';
+
 dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN!);
@@ -16,8 +18,10 @@ setupSaldoCommand(bot);
 setupHistoricoCommand(bot);
 
 bot.start((ctx) => {
-    ctx.reply(`👋 Olá ${ctx.from.first_name}, sou seu bot financeiro.`);
-});
+    const nome = ctx.from?.first_name || 'usuário';
+    ctx.replyWithMarkdownV2(mensagemBoasVindas(nome));
+})
+
 
 bot.launch();
 console.log('🤖 Bot financeiro rodando...');
