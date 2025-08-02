@@ -1,10 +1,12 @@
 import { Telegraf } from 'telegraf';
 import dotenv from 'dotenv';
+
 import { setupEntradaCommand } from './commands/entrada';
 import { setupSaidaCommand } from './commands/saida';
 import { setupSaldoCommand } from './commands/saldo';
 import { setupHistoricoCommand } from './commands/historico';
 import { setupCategoriasCommand } from './commands/categorias';
+import { setupRelatoriosCommand } from './commands/relatorios';
 
 import { mensagemBoasVindas } from './mensagens';
 
@@ -18,6 +20,7 @@ setupSaidaCommand(bot);
 setupSaldoCommand(bot);
 setupHistoricoCommand(bot);
 setupCategoriasCommand(bot);
+setupRelatoriosCommand(bot);
 
 bot.start((ctx) => {
     const nome = ctx.from?.first_name || 'usuário';
