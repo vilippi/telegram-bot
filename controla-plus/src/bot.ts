@@ -4,6 +4,7 @@ import { setupEntradaCommand } from './commands/entrada';
 import { setupSaidaCommand } from './commands/saida';
 import { setupSaldoCommand } from './commands/saldo';
 import { setupHistoricoCommand } from './commands/historico';
+import { setupCategoriasCommand } from './commands/categorias';
 
 import { mensagemBoasVindas } from './mensagens';
 
@@ -16,6 +17,7 @@ setupEntradaCommand(bot);
 setupSaidaCommand(bot);
 setupSaldoCommand(bot);
 setupHistoricoCommand(bot);
+setupCategoriasCommand(bot);
 
 bot.start((ctx) => {
     const nome = ctx.from?.first_name || 'usuário';

@@ -1,5 +1,6 @@
 import { Telegraf } from 'telegraf';
 import { registrarLancamento, getSaldo } from '../storage/dados';
+import { categoriaEhValida, listarCategorias } from '../utils/categoriasValidas';
 
 export function setupEntradaCommand(bot: Telegraf) {
     bot.command('entrada', (ctx) => {
@@ -10,7 +11,10 @@ export function setupEntradaCommand(bot: Telegraf) {
         const valor = parseFloat(partes[1]);
         if (isNaN(valor)) return ctx.reply("❗ Use: /entrada [valor] [categoria]");
 
-        const categoria = partes.slice(2).join(' ') || 'sem-categoria';
+        const categoria = partes.slice(2).join(' ').trim().toLowerCase();
+        if (!categoriaEhValida(categoria)) {
+            return ctx.reply(`❗ Categoria inválida: "${categoria}"\n\n📋 Categorias válidas:\n${listarCategorias()}`);
+        }
 
         const lancamento = registrarLancamento(userId, 'entrada', valor, categoria);
         const saldo = getSaldo(userId);
