@@ -8,9 +8,33 @@ export function setupCategoriasCommand(bot: Telegraf) {
 
         const historico = getHistorico(userId);
         if (historico.length === 0) {
-            return ctx.reply("📭 Você ainda não tem lançamentos para agrupar por categoria.");
+            return ctx.reply("📭 Você ainda não tem lançamentos para exibir.");
         }
 
+        const partes = ctx.message.text.split(' ');
+        const categoriaBuscada = partes.slice(1).join(' ').toLowerCase();
+
+        if (categoriaBuscada) {
+            // Filtrar por categoria
+            const filtrado = historico.filter(item => item.categoria.toLowerCase() === categoriaBuscada);
+
+            if (filtrado.length === 0) {
+                return ctx.reply(`❌ Nenhuma movimentação encontrada para a categoria *${categoriaBuscada}*.`);
+            }
+
+            let mensagem = `📂 Movimentações da categoria *${categoriaBuscada}*:\n\n`;
+
+            for (const item of filtrado) {
+                const valor = item.valor.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+                const tipo = item.tipo === 'entrada' ? '➕ Entrada' : '➖ Saída';
+                const data = item.data ? ` em ${item.data}` : ''; // opcional
+                mensagem += `${tipo}: ${valor}${data}\n`;
+            }
+
+            return ctx.reply(mensagem.trim(), { parse_mode: 'Markdown' });
+        }
+
+        // Caso não tenha passado categoria → resumo geral
         const entradas: Record<string, number> = {};
         const saidas: Record<string, number> = {};
 

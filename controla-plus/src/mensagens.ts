@@ -20,5 +20,8 @@ _Exemplo:_ \`/saida 150 mercado\`
 🧹 */limpar*  
 \\- Limpar todas as transações
 
+*/ajuda*  
+\\- Mostra todos os comandos
+
 Digite qualquer um desses comandos para começar\\!`;
 }
