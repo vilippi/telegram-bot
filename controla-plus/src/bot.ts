@@ -8,6 +8,8 @@ import { setupHistoricoCommand } from './commands/historico';
 import { setupCategoriasCommand } from './commands/categorias';
 import { setupRelatoriosCommand } from './commands/relatorios';
 import { setupAjudaCommand } from './commands/ajuda';
+import { setupTendenciaCommand } from './commands/tendencia';
+import { setupEconomiaCommand } from './commands/economia';
 
 import { mensagemBoasVindas } from './mensagens';
 
@@ -23,6 +25,8 @@ setupHistoricoCommand(bot);
 setupCategoriasCommand(bot);
 setupRelatoriosCommand(bot);
 setupAjudaCommand(bot);
+setupTendenciaCommand(bot);
+setupEconomiaCommand(bot);
 
 
 bot.start((ctx) => {

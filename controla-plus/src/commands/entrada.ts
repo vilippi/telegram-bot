@@ -1,6 +1,7 @@
 import { Telegraf } from 'telegraf';
 import { registrarLancamento, getSaldo } from '../storage/dados';
 import { categoriaEhValida, listarCategorias } from '../utils/categoriasValidas';
+import { verificarSeBateuMeta } from '../utils/verificaMeta';
 
 export function setupEntradaCommand(bot: Telegraf) {
     bot.command('entrada', (ctx) => {
@@ -24,5 +25,7 @@ export function setupEntradaCommand(bot: Telegraf) {
     • 🏷️ Categoria: ${categoria}
     • 📆 ${new Date(lancamento.data).toLocaleString('pt-BR')}
     • 💼 Saldo atual: R$ ${saldo.toFixed(2)}`);
+        const msgMeta = verificarSeBateuMeta(userId);
+        if (msgMeta) ctx.reply(msgMeta);
     });
 }
