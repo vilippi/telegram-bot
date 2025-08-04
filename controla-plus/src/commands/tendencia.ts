@@ -1,7 +1,12 @@
 import { Telegraf } from 'telegraf';
 import { getHistorico } from '../storage/dados';
 
-function formatarMesAno(dataISO: string) {
+function getMesAno(dataISO: string): string {
+    const d = new Date(dataISO);
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;
+}
+
+function formatarMesAno(dataISO: string): string {
     const data = new Date(dataISO);
     return data.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
 }
@@ -19,26 +24,30 @@ export function setupTendenciaCommand(bot: Telegraf) {
         const porMes: Record<string, number> = {};
 
         for (const item of historico) {
-            const data = new Date(item.data);
-            const chave = `${data.getFullYear()}-${String(data.getMonth() + 1).padStart(2, '0')}`; // ex: 2025-08
+            const chave = getMesAno(item.data);
             porMes[chave] = (porMes[chave] || 0) + item.valor;
         }
 
-        const mesesOrdenados = Object.keys(porMes).sort(); // ordena cronologicamente
+        const mesesOrdenados = Object.keys(porMes).sort();
         let mensagem = "📈 Tendência de gastos:\n\n";
 
         let total = 0;
-        let anterior = 0;
+        let anterior: number | null = null;
 
         for (const chave of mesesOrdenados) {
             const [ano, mes] = chave.split("-");
             const valor = porMes[chave];
             const data = new Date(Number(ano), Number(mes) - 1);
-            const nomeMes = data.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
+            const nomeMes = formatarMesAno(data.toISOString());
 
-            const simbolo = anterior === 0 ? "" : valor > anterior ? "↑" : valor < anterior ? "↓" : "→";
+            let variacao = '';
+            if (anterior !== null) {
+                const porcentagem = ((valor - anterior) / anterior) * 100;
+                const simbolo = porcentagem > 0 ? '+' : porcentagem < 0 ? '-' : '';
+                variacao = ` (${simbolo}${Math.abs(porcentagem).toFixed(2)}%)`;
+            }
 
-            mensagem += `• ${nomeMes}: R$ ${valor.toFixed(2)} ${simbolo}\n`;
+            mensagem += `• ${nomeMes}: R$ ${valor.toFixed(2)}${variacao}\n`;
             anterior = valor;
             total += valor;
         }
