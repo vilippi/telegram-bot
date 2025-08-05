@@ -10,6 +10,8 @@ import { setupRelatoriosCommand } from './commands/relatorios';
 import { setupAjudaCommand } from './commands/ajuda';
 import { setupTendenciaCommand } from './commands/tendencia';
 import { setupEconomiaCommand } from './commands/economia';
+import { setupPrevisaoCommand } from './commands/previsao';
+import { setupFixasCommand } from './commands/fixas';
 
 import { mensagemBoasVindas } from './mensagens';
 
@@ -27,6 +29,8 @@ setupRelatoriosCommand(bot);
 setupAjudaCommand(bot);
 setupTendenciaCommand(bot);
 setupEconomiaCommand(bot);
+setupPrevisaoCommand(bot);
+setupFixasCommand(bot);
 
 
 bot.start((ctx) => {
