@@ -19,7 +19,7 @@ Um bot simples, funcional e **100% gratuito** criado com **Node.js + TypeScript*
 | `/previsao`                      | Gera uma **previsão de saldo futuro** com base em entradas e saídas fixas |
 | `/planejamento`                  | Permite definir **metas de economia** ou **limites de gasto por categoria** |
 | `/lembrete`                      | Agenda um **lembrete financeiro**, como vencimento de conta ou fatura    |
-| `/ficas`                         | Mostra **dicas financeiras** e orientações para organizar suas finanças  |
+| `/fixas`                         | Registra **gastos fixos**                                                |
 
 > ✅ **Carteiras isoladas:** Cada usuário tem sua própria base de dados  
 > 📊 **Relatórios organizados por categoria**  
