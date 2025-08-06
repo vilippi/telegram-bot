@@ -28,6 +28,25 @@ export function registrarLancamento(
     return lancamento;
 }
 
+export function existeLancamento(
+    userId: number,
+    tipo: 'entrada' | 'saida',
+    valor: number,
+    categoria: string,
+    data: string,
+    descricao?: string
+): boolean {
+    const lista = historicos[userId] || [];
+    return lista.some((item) =>
+        item.tipo === tipo &&
+        item.valor === valor &&
+        item.categoria.toLowerCase() === categoria.toLowerCase() &&
+        item.data === data &&
+        (item.descricao || '') === (descricao || '')
+    );
+}
+
+
 
 export function getSaldo(userId: number): number {
     return saldos[userId] || 0;
