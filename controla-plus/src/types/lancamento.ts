@@ -3,4 +3,5 @@ export type Lancamento = {
     categoria: string;
     data: string;
     tipo: 'entrada' | 'saida';
+    descricao?: string;
 };
