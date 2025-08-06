@@ -8,7 +8,7 @@ export function registrarLancamento(
     tipo: 'entrada' | 'saida',
     valor: number,
     categoria: string,
-    data?: string // ← adicionado
+    data?: string
 ): Lancamento {
     if (!saldos[userId]) saldos[userId] = 0;
     if (!historicos[userId]) historicos[userId] = [];
