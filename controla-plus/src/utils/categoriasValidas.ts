@@ -11,8 +11,9 @@ export const categoriasValidas = [
     'aluguel',
     'transporte',
     'lazer',
-    'lanche',
+    'comida',
     'contas',
+    'investimento',
     'outros'
 ];
 
