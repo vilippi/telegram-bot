@@ -14,6 +14,7 @@ import { setupPrevisaoCommand } from './commands/previsao';
 import { setupFixasCommand } from './commands/fixas';
 
 import { iniciarAgendador } from './utils/agendador';
+import { iniciarAgendadorRelatorio } from './utils/agendadorRelatorio';
 
 import { mensagemBoasVindas } from './mensagens';
 
@@ -33,7 +34,10 @@ setupTendenciaCommand(bot);
 setupEconomiaCommand(bot);
 setupPrevisaoCommand(bot);
 setupFixasCommand(bot);
+
+// Automatização
 iniciarAgendador(bot);
+iniciarAgendadorRelatorio(bot);
 
 bot.start((ctx) => {
     const nome = ctx.from?.first_name || 'usuário';

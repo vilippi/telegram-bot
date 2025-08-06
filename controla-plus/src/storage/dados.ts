@@ -33,3 +33,7 @@ export function getSaldo(userId: number): number {
 export function getHistorico(userId: number): Lancamento[] {
     return historicos[userId] || [];
 }
+
+export function getUsuariosComHistorico(): number[] {
+    return Object.keys(historicos).map((id) => parseInt(id));
+}
