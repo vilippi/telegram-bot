@@ -12,6 +12,7 @@ import { setupTendenciaCommand } from './commands/tendencia';
 import { setupEconomiaCommand } from './commands/economia';
 import { setupPrevisaoCommand } from './commands/previsao';
 import { setupFixasCommand } from './commands/fixas';
+import { setupImportarCommand } from './commands/importar';
 
 import { iniciarAgendador } from './utils/agendador';
 import { iniciarAgendadorRelatorio } from './utils/agendadorRelatorio';
@@ -34,6 +35,7 @@ setupTendenciaCommand(bot);
 setupEconomiaCommand(bot);
 setupPrevisaoCommand(bot);
 setupFixasCommand(bot);
+setupImportarCommand(bot);
 
 // Automatização
 iniciarAgendador(bot);

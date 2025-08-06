@@ -7,17 +7,17 @@ export function registrarLancamento(
     userId: number,
     tipo: 'entrada' | 'saida',
     valor: number,
-    categoria: string
+    categoria: string,
+    data?: string // ← adicionado
 ): Lancamento {
     if (!saldos[userId]) saldos[userId] = 0;
     if (!historicos[userId]) historicos[userId] = [];
 
-    const data = new Date().toISOString();
     const lancamento: Lancamento = {
         valor,
         categoria,
-        data,
-        tipo
+        data: data || new Date().toISOString(),
+        tipo,
     };
 
     historicos[userId].push(lancamento);
