@@ -13,6 +13,8 @@ import { setupEconomiaCommand } from './commands/economia';
 import { setupPrevisaoCommand } from './commands/previsao';
 import { setupFixasCommand } from './commands/fixas';
 
+import { iniciarAgendador } from './utils/agendador';
+
 import { mensagemBoasVindas } from './mensagens';
 
 dotenv.config();
@@ -31,13 +33,12 @@ setupTendenciaCommand(bot);
 setupEconomiaCommand(bot);
 setupPrevisaoCommand(bot);
 setupFixasCommand(bot);
-
+iniciarAgendador(bot);
 
 bot.start((ctx) => {
     const nome = ctx.from?.first_name || 'usuário';
     ctx.replyWithMarkdownV2(mensagemBoasVindas(nome));
 })
-
 
 bot.launch();
 console.log('🤖 Bot financeiro rodando...');
